@@ -1,0 +1,34 @@
+def calcular_horas_extras(salario_base, horas_extras):
+    return horas_extras * (salario_base * 0.015)
+
+def calcular_descontos_faltas(salario_base, faltas):
+    return faltas * (salario_base * 0.02)
+
+def calcular_bonus(cargo, recebe_bonus):
+    if recebe_bonus.lower() == 's':
+        bonus = {1: 1000, 2: 500, 3: 300, 4: 100}
+        return bonus.get(cargo, 0)
+    else:
+        return 0
+
+nome = input("Nome do funcionário: ")
+cargo = int(input("Cargo (1-Gerente, 2-Analista, 3-Assistente, 4-Estagiário): "))
+salario_base = float(input("Salário base: R$ "))
+horas_extras = float(input("Total de horas extras trabalhadas: "))
+faltas = int(input("Total de faltas no mês: "))
+recebe_bonus = input("Recebe bônus por desempenho (s/n)? ")
+
+valor_horas_extras = calcular_horas_extras(salario_base, horas_extras)
+valor_desconto_faltas = calcular_descontos_faltas(salario_base, faltas)
+valor_bonus = calcular_bonus(cargo, recebe_bonus)
+
+salario_bruto = salario_base
+total_acrescimos = valor_horas_extras + valor_bonus
+total_descontos = valor_desconto_faltas
+salario_final = salario_bruto + total_acrescimos - total_descontos
+
+print(f"\nRelatório de pagamento para {nome}:")
+print(f"Salário Bruto: R$ {salario_bruto:.2f}")
+print(f"Total de Acréscimos: R$ {total_acrescimos:.2f}")
+print(f"Total de Descontos: R$ {total_descontos:.2f}")
+print(f"Salário Final: R$ {salario_final:.2f}")
